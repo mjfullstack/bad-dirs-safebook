@@ -1,0 +1,17 @@
+
+.navbar-nav {
+  padding-bottom: 10rem;
+  width: 100%;
+  text-align: center;
+  background-color: "light-blue";
+  border: 2px red;
+}
+
+.navbar-nav > li {
+    float: none;
+    display: inline-block;
+}
+
+
+
+

@@ -18,6 +18,16 @@ const userSeed = [
         age: 36,
         created_date: new Date(Date.now()),
         last_modified_date: new Date(Date.now())
+    },
+    {
+        first_name: "Michael",
+        middle_name: "Wayne",
+        last_name: "Johnson",
+        user_pic: null,
+        birthdate: "1962-09-05",
+        age: 56,
+        created_date: new Date(Date.now()),
+        last_modified_date: new Date(Date.now())
     }
 ];
 
