@@ -13,7 +13,7 @@ const RoboList = ({ robots , shuffle}) => {
       name={robots[idx].name}
       username={robots[idx].username}
       email={robots[idx].email}
-      beenclicked={robots[idx].beenClicked}
+      beenclicked={robots[idx].beenclicked}
       shuffle={shuffle}/> )
   })
   return (

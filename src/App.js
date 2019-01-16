@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import CardList from './Components/CardList/CardList';
 import RoboList from './Components/CardList/RoboList';
 import { robots } from './robots';
+  // eslint-disable-next-line
 import RoboTitle from './Components/RoboTitle/RoboTitle';
 // import Button from './Components/Button'
 // import ShuffleBtn from './ShuffleBtn';
@@ -25,9 +26,9 @@ class App extends Component {
     console.log("event.target.value: ", event.target.value);
   };
 
-  shuffleArray = (array) => {
+  shuffleArray = (array, roboID) => {
     console.log("shuffleArray got called!");
-    console.log(`RoboButton array[0].id: `, array[0].id);
+    console.log(`RoboButton roboID: `, roboID);
 
     // console.log("array: ", array);
     let i = array.length - 1;

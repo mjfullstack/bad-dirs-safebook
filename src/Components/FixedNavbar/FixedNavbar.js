@@ -25,6 +25,7 @@ function FixedNavbar() {
       </div> {/* <!-- /.container-fluid --> */}
     </nav>
   );
+  // eslint-disable-next-line
 {/**********
 
 // Removed from Centered
