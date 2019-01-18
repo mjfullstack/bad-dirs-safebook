@@ -7,16 +7,13 @@ import React from 'react'; // Required for JSX i.e. <div> below is
 export default class RoboButton extends React.Component {
 
   onRoboBtnClick = (id, shuffle, getRoboID) => {
-    console.log("onRoboBtnClick-id: ", id); // KNOWN!
-    // console.log("this.state.robots[id].beenclicked: ", this.state.robots[id].beenclicked);
-    // console.log("onRoboBtnClick-roboID: ", getRoboID(id));
-    //shuffle(getRoboID(id)); // GETTING PASSED!!!
-    shuffle(); // GETTING PASSED!!!
+    // console.log("onRoboBtnClick-id: ", id); // id is KNOWN!
+    shuffle();
     return getRoboID(id);
   };
   
   
-  render() { // EVERY class / extends needs a render()
+  render() { // EVERY class that extends Component needs a render()
     const {id, beenclicked, shuffle, getRoboID } = this.props;
     return ( 
       // return ONE component i.e. button
