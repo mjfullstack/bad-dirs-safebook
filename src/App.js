@@ -26,6 +26,22 @@ export default class App extends Component {
     console.log("event.target.value: ", event.target.value);
   };
 
+  // Clears all the beenclicked's
+  clearAllClicks =() => {
+    this.setState((pvSt) => {
+      const updatedRobos = pvSt.robots.map( (robot) => {
+        return { ...robot, beenclicked: 0}
+      })
+      // console.log("Updated Robos: ", updatedRobos);
+      return ({robots: updatedRobos})
+    },
+    () => {    
+      // console.log("AFTER CLEARING, Let's look at robots.beenlicked...");
+      // this.state.robots.map((robot) => {
+      //   return console.log(`robot.id: ${robot.id}; robot.beenclicked ${robot.beenclicked}`);
+      // })
+    });
+  }
 
 
   roboID = (id) => {
@@ -52,9 +68,10 @@ export default class App extends Component {
         this.setState({highScore: this.state.currentScore + 1});
         // console.log(`Just set High Score: ${this.state.highScore}`)
       }
-      if ((this.state.currentScore) >= this.state.robots.length) {
+      if ((this.state.currentScore) > this.state.robots.length) {
         console.log("YOU WON !!!");
-        // reset all robots[idx].beenclicked = 0
+        // Now clear all the beenclicked's
+        this.clearAllClicks();
       }
       return this.setState((pvSt) => {
         const newRobos = pvSt.robots.map(robot => {
@@ -90,20 +107,7 @@ export default class App extends Component {
     // });
 
     // Now clear all the beenclicked's
-    this.setState((pvSt) => {
-      const updatedRobos = pvSt.robots.map( (robot) => {
-        return { ...robot, beenclicked: 0}
-      })
-      // console.log("Updated Robos: ", updatedRobos);
-      return ({robots: updatedRobos})
-    },
-    () => {    
-      // console.log("AFTER CLEARING, Let's look at robots.beenlicked...");
-      // this.state.robots.map((robot) => {
-      //   return console.log(`robot.id: ${robot.id}; robot.beenclicked ${robot.beenclicked}`);
-      // })
-    });
-
+    this.clearAllClicks();
     // Update Score
     this.setState({currentScore: 0},
       () => {
@@ -145,7 +149,10 @@ export default class App extends Component {
 
     return (
       <div className='tc'> {/** tc = tachyon text-align: center;  **/}
-        <FixedNavbar />
+        <FixedNavbar
+          currentScore={this.state.currentScore}
+          highScore={this.state.highScore}
+        />
         {/* <RoboTitle /> */}
         {/* <SearchBox searchChange={this.onSearchChange}/> */}
         {/* <ShuffleBtn shuffleArray={this.shuffleArray(this.state.robots)}/> */}

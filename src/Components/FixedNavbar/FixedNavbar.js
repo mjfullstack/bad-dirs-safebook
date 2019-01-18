@@ -1,16 +1,21 @@
 import React from "react";
 import './FixedNavbar.css';
 
-function FixedNavbar() {
+class FixedNavbar extends React.Component {
+  render () {
+    const {currentScore, highScore} = this.props;
+    console.log(`Score: ${currentScore} High Score: ${highScore}`);
   return (
     <nav className="navbar fixed-top tc" role="navigation">
       <div className="container-fluid">
         {/* <!-- Brand and toggle get grouped for better mobile display --> */}
-        <div className="navbar-header">
-          <ul className="nav navbar-nav">
-            <li><h1>SafeBook</h1></li>
+        {/* <div className="navbar-header"> */}
+          <ul className="nav navbar-nav tc">
+            {/* <li><h1>SafeBook  Score: {currentScore} High Score{highScore}</h1></li> */}
+            <li className='tc'><h1 className='tc' >Robo Click ME</h1></li> 
+            <li className='tc'><h2>Score: {currentScore} -- High Score: {highScore}</h2></li>
           </ul>
-        </div>
+        {/* </div> */}
 
         {/* <!-- Collect the nav links, forms, and other content for toggling --> */}
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -24,7 +29,9 @@ function FixedNavbar() {
         </div> {/* <!-- /.navbar-collapse --> */}
       </div> {/* <!-- /.container-fluid --> */}
     </nav>
-  );
+  )
+  }
+};
   // eslint-disable-next-line
 {/**********
 
@@ -50,7 +57,7 @@ function FixedNavbar() {
     </div>
     );
      */}
-  }
+  
 
   export default FixedNavbar;
 

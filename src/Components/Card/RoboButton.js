@@ -14,17 +14,17 @@ export default class RoboButton extends React.Component {
   
   
   render() { // EVERY class that extends Component needs a render()
-    const {id, beenclicked, shuffle, getRoboID } = this.props;
+    const {id, shuffle, getRoboID } = this.props;
     return ( 
       // return ONE component i.e. button
       <button  
         onClick={() => this.onRoboBtnClick(id, shuffle, getRoboID)} 
-        className='tc bg-green dit br3 pa2 ma2 grow bw2 shadow-5 fl w-20  card'>
+        className='tc bg-green dit br3 pa2 ma2 grow bw2 shadow-5 fl w-19  card'>
       {/* <img onClick={() => this.onRoboBtnClick(id)} src={`https://robohash.org/${id}?size=150x150`} alt='RoboFoto'/> */}
-        <img src={`https://robohash.org/${id}?size=150x150`} alt='RoboFoto'/>
+        <img className='tc' src={`https://robohash.org/${id}?size=100x100`} alt='RoboFoto'/>
         <div className="card-body tc">
-          <p>id: {id}</p>
-          <p>Clk'd: {beenclicked}</p>
+          {/* <p>id: {id}</p> */}
+          {/* <p>Clk'd: {beenclicked}</p> */}
           {/* <p className='tc'>Pick ME! </p> */}
           {/* <h5 className="card-title">{name}</h5> */}
           {/* <p>Username: {username}</p> Lorem ipsum*/}
