@@ -3,8 +3,9 @@ import './FixedNavbar.css';
 
 class FixedNavbar extends React.Component {
   render () {
-    const {currentScore, highScore} = this.props;
+    const {currentScore, highScore, wonDisplayed} = this.props;
     console.log(`Score: ${currentScore} High Score: ${highScore}`);
+    console.log(`wonDisplayed: ${wonDisplayed}`);
   return (
     <nav className="navbar fixed-top tc" role="navigation">
       <div className="container-fluid">
@@ -14,6 +15,7 @@ class FixedNavbar extends React.Component {
             {/* <li><h1>SafeBook  Score: {currentScore} High Score{highScore}</h1></li> */}
             <li className='tc'><h1 className='tc' >Robo Click ME</h1></li> 
             <li className='tc'><h2>Score: {currentScore} -- High Score: {highScore}</h2></li>
+            {wonDisplayed ? <li className='tc' id='winner'><h1>You Won!!!</h1></li> : <li></li>}
           </ul>
         {/* </div> */}
 

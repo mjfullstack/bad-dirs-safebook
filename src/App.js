@@ -17,7 +17,8 @@ export default class App extends Component {
       searchfield: '',
       cardClicked: '',
       currentScore: 0,
-      highScore: 0
+      highScore: 0,
+      wonDisplayed: false
     }
   }
 
@@ -68,11 +69,22 @@ export default class App extends Component {
         this.setState({highScore: this.state.currentScore + 1});
         // console.log(`Just set High Score: ${this.state.highScore}`)
       }
-      if ((this.state.currentScore) > this.state.robots.length) {
+      if ((this.state.currentScore + 1) >= this.state.robots.length) {
         console.log("YOU WON !!!");
-        // Now clear all the beenclicked's
-        this.clearAllClicks();
-      }
+        this.setState({wonDisplayed: true},
+          () => {console.log(`this.state.wonDisplayed: ${this.state.wonDisplayed}.`)}
+        );
+        // eslint-disable-next-line
+        let wonTimer = setTimeout(() =>
+           this.setState({wonDisplayed: false, currentScore: 0},
+            () => {
+              console.log(`this.state.wonDisplayed: ${this.state.wonDisplayed}.`);
+              // Update Score
+              console.log(`Current Score: ${this.state.currentScore}; High Score: ${this.state.highScore}`);
+              // Now clear all the beenclicked's
+              this.clearAllClicks();
+            }), 2000);
+      };
       return this.setState((pvSt) => {
         const newRobos = pvSt.robots.map(robot => {
           if (robot.id === id) {
@@ -152,6 +164,7 @@ export default class App extends Component {
         <FixedNavbar
           currentScore={this.state.currentScore}
           highScore={this.state.highScore}
+          wonDisplayed={this.state.wonDisplayed}
         />
         {/* <RoboTitle /> */}
         {/* <SearchBox searchChange={this.onSearchChange}/> */}
