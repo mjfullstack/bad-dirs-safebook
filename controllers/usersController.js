@@ -17,5 +17,20 @@ module.exports = {
             .findById(req.params.id)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
+    },
+    register: function (req, res) {
+        db.Users
+            .register(
+                req.params.first_name,
+                req.params.middle_name,
+                req.params.last_name,
+                req.params.user_pic,
+                req.params.birthdate,
+                req.params.age,
+                req.params.created_date,
+                req.params.last_modified_date
+            )
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     }
 }

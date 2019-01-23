@@ -6,9 +6,10 @@
   text-align: center;
   background-color: "light-blue";
   border: 2px red;
+  /* text-decoration: none; */
 }
 
-.navbar-nav > li {
+.navbar-nav > a {
     float: none;
     display: inline-block;
 }

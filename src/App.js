@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import RoboList from './Components/CardList/RoboList';
-import { robots } from './robots';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Register from "./pages/LoginScreen/registerViaMedium";
+import Login from "./pages/LoginScreen/loginViaMedium";
+import FindUser from "./pages/FindUser";
+import HomePage from "./pages/HomePage";
+import NoMatch from "./pages/NoMatch";
+import { robots } from './Components/CardList/robots';
 // eslint-disable-next-line
-import RoboTitle from './Components/RoboTitle/RoboTitle';
-// import Button from './Components/Button'
-// import ShuffleBtn from './ShuffleBtn';
-// import SearchBox from './Components/SearchBox/SearchBox';
-// import Jumbotron from './Components/JumbotronClickMe/Jumbotron';
+// import RoboTitle from './Components/RoboTitle/RoboTitle';
+import './App.css';
 import FixedNavbar from './Components/FixedNavbar/FixedNavbar';
 
 export default class App extends Component {
@@ -21,11 +23,6 @@ export default class App extends Component {
       wonDisplayed: false
     }
   }
-
-  onSearchChange = (event) => {
-    this.setState({ searchfield: event.target.value })
-    console.log("event.target.value: ", event.target.value);
-  };
 
   // Clears all the beenclicked's
   clearAllClicks =() => {
@@ -50,6 +47,7 @@ export default class App extends Component {
     this.setState({ cardClicked: id }); // Does get set
     // console.log("roboID - Robots: ", this.state.robots,  id)
     
+    // PSEUDO CODE for this function...
     // Determine scoring for this click...
     // if beenclicked=0, inc currentScore
     //    if currentScore > highScore, highScore = currentScore
@@ -102,18 +100,14 @@ export default class App extends Component {
       //   "App.roboID.this.state.robots[id].beenclicked: ",
       //   this.state.robots.filter(robot => robot.id === id)[0].beenclicked
       // )
-      // console.log(`In After CB, Current Score: ${this.state.currentScore}; High Score: ${this.state.highScore}`);
       console.log(`In After CB, Current Score: ${this.state.currentScore}; High Score: ${this.state.highScore}`);
-      // console.log(this.state.robots, "newly shuffled robots after clicking")
       return id;
     })
   } else {
     console.log("Game Over!");
-    // Add card shake animation for 1 sec
+    // Add card shake animation for 1 sec (TBD... Added You Won instead, so far)
     // Add reset of all beenclicked's
-    
     // console.log("BEFORE CLEARING, Let's look at robots.beenlicked...");
-
     // this.state.robots.map ( (robot) => { // Just Reading, not setting state
     //   return console.log(`robot.id: ${robot.id}; robot.beenclicked ${robot.beenclicked}`);
     // });
@@ -128,18 +122,15 @@ export default class App extends Component {
     )
   }
 };
-  // this.setState(function(previousState){},callbackToExecuteAfterSetState)
-  // this.setState({},callbackToExecuteAfterSetState)
+// Possible forms of setState: object, function with callback, or 
+// object with callback... see above. General form, see below
+// this.setState(function(previousState){},callbackToExecuteAfterSetState)
+// this.setState({},callbackToExecuteAfterSetState)
 
-  // shuffleArray = (roboID, array = this.state.robots.filter(robot => {
-  //   return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
-  // }) ) => {
   shuffleArray = () => {
     let array = this.state.robots.filter(robot => {
       return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
     });
-    // let roboID = this.onRoboBtnClick.roboID;
-    // console.log("shuffleArray got called!");
 
     let i = array.length - 1;
     for (; i > 0; i--) {
@@ -152,47 +143,78 @@ export default class App extends Component {
     return array;
   };
 
+  onSearchChange = (event) => {
+    this.setState({ searchfield: event.target.value })
+    console.log("event.target.value: ", event.target.value);
+  };
 
   render() {
     const filteredRobots = this.state.robots.filter(robot => {
       return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
     })
     // console.log("filteredRobots: ", filteredRobots);
-
     return (
-      <div className='tc'> {/** tc = tachyon text-align: center;  **/}
-        <FixedNavbar
-          currentScore={this.state.currentScore}
-          highScore={this.state.highScore}
-          wonDisplayed={this.state.wonDisplayed}
-        />
-        {/* <RoboTitle /> */}
-        {/* <SearchBox searchChange={this.onSearchChange}/> */}
-        {/* <ShuffleBtn shuffleArray={this.shuffleArray(this.state.robots)}/> */}
+      <Router>
+        {/* <div> */}
+        {/* <Nav /> */}
+        <div className='tc'> {/** tc = tachyon text-align: center;  **/}
+          <FixedNavbar
+            currentScore={this.state.currentScore}
+            highScore={this.state.highScore}
+            wonDisplayed={this.state.wonDisplayed}
+          />
+          {/* <RoboTitle /> */}
+          {/* <SearchBox searchChange={this.onSearchChange}/> */}
+          {/* <ShuffleBtn shuffleArray={this.shuffleArray(this.state.robots)}/> */}
 
-        {/* 
-         <Button // This Button is a GOOD reference Button
-           // onClick={() => this.shuffleArray(this.state.robots)}
-           onClick={() => this.setState({ robots: this.shuffleArray(filteredRobots)})}
-           type="primary" // these elements are passed down through
-           className="input-lg" // Deconsructed props - See Button/index.js
-         >
-           Shuffle Again!
-         </Button>
- */}
+          {/* 
+          <Button // This Button is a GOOD reference Button
+            // onClick={() => this.shuffleArray(this.state.robots)}
+            onClick={() => this.setState({ robots: this.shuffleArray(filteredRobots)})}
+            type="primary" // these elements are passed down through
+            className="input-lg" // Deconsructed props - See Button/index.js
+          >
+            Shuffle Again!
+          </Button>
+          */}
 
-        {/* <CardList robots={this.state.robots}/> */}
-        {/* <CardList robots={filteredRobots} > */}
+          {/* <CardList robots={this.state.robots}/> */}
+          {/* <CardList robots={filteredRobots} > */}
+          <Switch>
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/" component={Login} />
+            <Route exact path="/home" 
+              render={(props) => <HomePage {...props}
+              robots={filteredRobots}
+              shuffle={() => this.setState({ robots: this.shuffleArray() })}
+              getRoboID={this.roboID}
+             />}
+            />
+            {/* <Route exact path="/home" component={HomePage} /> */}
+            {/* <Route exact path="/:id" component={FindUser} /> */}
+            <Route exact path="/finduser" 
+              render={(props) => <FindUser {...props}
+              robots={filteredRobots}
+              searchChange={(event) => this.setState({searchfield: event.target.value})}
+              shuffle={() => this.setState({ robots: this.shuffleArray() })}
+              // shuffle={(event) => this.onSearchChange() }
+              getRoboID={this.roboID}
+             />}
+            />
+            <Route component={NoMatch} />
+          </Switch>
+
+
+{/* 
         <RoboList
           robots={filteredRobots}
-          // shuffle={() => this.setState({ robots: this.shuffleArray(filteredRobots)})}
           shuffle={() => this.setState({ robots: this.shuffleArray() })}
-          // shuffle={ this.setState({ robots: this.shuffleArray()})}
           getRoboID={this.roboID}
         >
         </RoboList>
-        {/* </CardList> */}
-      </div>
+ */}
+        </div>
+      </Router>
     )
   }
 };
