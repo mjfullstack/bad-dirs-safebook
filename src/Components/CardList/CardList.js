@@ -1,11 +1,22 @@
 // Parent of Card.js
 import React from 'react';
-// import Card from '../Card/Card';
-import RoboButton from '../Card/RoboButton'
+import Card from '../Card/Card';
 
-const CardList = ({ robots }) => {
-  const cardArray = robots.map((user, idx) => {
-    return ( <RoboButton key={robots[idx].id} id={robots[idx].id} name={robots[idx].name} username={robots[idx].username} email={robots[idx].email} /> )
+const CardList = ({ users }) => {
+  const cardArray = users.map((user, idx) => {
+    return ( 
+      <Card 
+        key={user.id} 
+        id={user.id} 
+        first_name={user.first_name} 
+        middle_name={user.middle_name} 
+        last_name={user.last_name} 
+        username={user.username} 
+        birthdate={user.birthdate}
+        age={user.age}
+        user_pic={user.user_pic}
+      />
+    )
   })
   return (
     <div className="container"> {/**  w-20 here makes whole list so small can't see it! **/}
