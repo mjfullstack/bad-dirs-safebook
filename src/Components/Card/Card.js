@@ -4,15 +4,27 @@ import React from 'react'; // Required for JSX i.e. <div> below is
 // Function Way, NOT extend component way
 // const Card = (props) => {
   // const { id, name, username, email } = props;
-const Card = ({ id, name, username, email }) => {  
+const Card = () => {  
+  const { 
+          // id, 
+          first_name,
+          middle_name,
+          last_name,
+          username,
+          // password,
+          user_pic,
+          birthdate,
+          age,
+          // pictures
+        } = this.props;
   return ( // return ONE component i.e. div
     <div className='tc bg-green dit br3 pa2 ma2 grow bw2 shadow-5 fl w-20 card'> 
-       <img src={`https://robohash.org/${id}?size=150x150`} alt='RoboFoto'/>
+       <img className='tc' src={user_pic} alt='Locating User'/>
        <div className="card-body">
-          {/* <h5 className="card-title">{name}</h5> */}
-          {/* <p>Username: {username}</p> Lorem ipsum*/}
-          {/* <p>Username:</p> */}
-          {/* <p>{username}</p> */}
+          <p className="card-title">{first_name} {middle_name} {last_name}</p>
+          <p>Username: {username}</p>
+          <p>Birth Date:{birthdate}</p>
+          <p>Age: {age}</p>
           {/* <p className="tl">e-mail: {email}</p> */}
        </div>
     </div>

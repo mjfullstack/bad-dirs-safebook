@@ -30,7 +30,7 @@ class Login extends Component {
             {/* <RoboTitle /> */}
 
             <Container fluid='fluid'>
-              <h2 className='myPageTitle'> Login</h2>
+              <h2 className='myPageTitle'>Enter Credentials</h2>
               <Row className='dataEntry'>
                 <Col size='md-2' margin='0rem' />
                 <Col size='md-4' margin='0rem'>
@@ -50,7 +50,7 @@ class Login extends Component {
                 </Col>
               </Row>
             </Container>
-              <RaisedButton label="Submit" href='/home' primary={true} style={style} onClick={(event) => this.handleLoginClick(event)}/>
+              <RaisedButton label="Login" href='/home' primary={true} style={style} onClick={(event) => this.handleLoginClick(event)}/>
               <h5 className="tc f5">Not yet a member?</h5>
               <RaisedButton label="Register" href='/register' primary={true} style={style} onClick={(event) => this.handleGoToRegisterClick(event)}/>
           </div>

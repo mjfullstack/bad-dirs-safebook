@@ -6,22 +6,83 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import './style.css';
 
-class Register extends Component {
-constructor(props){
-  super(props);
-  this.state={
-  first_name: '',
-  middle_name: '',
-  last_name: '',
-  username:'',
-  password:'',
-  user_pic: '',
-  birthdate: '',
-  age: ''
 
+// import ImageUploader from 'react-images-upload';
+// import {Image} from 'cloudinary-react';
+
+
+class Register extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      first_name: '',
+      middle_name: '',
+      last_name: '',
+      username:'',
+      password:'',
+      user_pic: '',
+      birthdate: '',
+      age: '',
+      id: '',
+      pictures: [],
+      image: ''
+      // largeImage
+    };
+    this.onDrop = this.onDrop.bind(this);
   }
- }
-render() {
+
+  // For Images in Registration
+  onDrop(picture) {
+    this.setState({
+        pictures: this.state.pictures.concat(picture),
+    });
+  }
+  
+
+  uploadFile = async e => {
+    console.log(`uploading file...`)
+    const files = e.target.files;
+    console.log("uploadFile - e.target.files: ", e.target.files);
+    console.log("uploadFile - files: ", files);
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'safebook');
+
+    const res = await fetch('https://api.cloudinary.com/v1_1/de2ynheeb/image/upload',
+      {
+        method: 'POST',
+        body: data
+      }
+    )
+    const file = await res.json();
+    console.log(file);
+    this.setState({
+      image: file.secure_url,
+      // largeImage: file.eager[0].secure_url
+    });
+  }
+
+
+  handleClick(event, myState) {
+    // Single user object
+    const newUser = {
+      first_name: this.state.first_name,
+      middle_name: this.state.middle_name,
+      last_name: this.state.last_name,
+      username:this.state.username,
+      password:this.state.password,
+      user_pic: this.state.user_pic,
+      birthdate: this.state.birthdate,
+      age: this.state.age,
+      id: this.state.id,
+      pictures: [this.state.image]
+    }
+
+    console.log("ENTRY to handleClick - newUser: ", newUser);
+   
+  }
+  render() {
+    const {state} = this.props;
     return (
       <div>
         <MuiThemeProvider>
@@ -41,7 +102,7 @@ render() {
                   onChange = {(event,newValue) => this.setState({first_name:newValue})}
                 />
               </Col>
-              <Col size='md-4' margin='0rem'>
+              <Col size='md-4'>
                 <TextField
                   hintText="Enter your MIDDLE name"
                   floatingLabelText="Middle Name"
@@ -57,8 +118,39 @@ render() {
                 />
               </Col>
             </Row>
+            <Row>
+              <Col size='md-4' margin='2rem' />
+              <Col size='md-4' margin='2rem'>
+              <input 
+                type="file" 
+                id="file" 
+                name="file"
+                placeholder="Upload an Image"
+                required
+                onChange={this.uploadFile} 
+                />
+                {/* <ImageUploader
+                  withIcon={true}
+                  withPreview={true}
+                  buttonText='Choose images'
+                  onChange={this.onDrop}
+                  imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                  maxFileSize={5242880}
+                /> */}
+              </Col>
+              <Col size='md-4' margin='2rem' />
+            </Row>
+            <Row>
+              {this.state.image && <img src={this.state.image} alt="Upload Preview" width="200" height='200'/>}
+            </Row>
           </Container>
-          <RaisedButton label="Submit" href="/home" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
+          <RaisedButton 
+            label="Submit"
+            href="#"
+            primary={true}
+            style={style}
+            onClick={(event) => this.handleClick(event, {state})}
+          />
         </div>
          </MuiThemeProvider>
       </div>

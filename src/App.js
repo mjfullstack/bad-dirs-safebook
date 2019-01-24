@@ -20,9 +20,31 @@ export default class App extends Component {
       cardClicked: '',
       currentScore: 0,
       highScore: 0,
-      wonDisplayed: false
+      wonDisplayed: false,
+      // SafeBook Specific Additions
+      // first_name: '',
+      // middle_name: '',
+      // last_name: '',
+      // username:'',
+      // password:'',
+      // user_pic: '',
+      // birthdate: '',
+      // age: '',
+      // id: '',
+      // pictures: [],
+      // Arrau of user objects
+      users: [],
+      // Single user object
     }
+    // this.onDrop = this.onDrop.bind(this);
   }
+
+  // For Images in Registration
+  // onDrop(picture) {
+  //   this.setState({
+  //       pictures: this.state.pictures.concat(picture),
+  //   });
+  // }
 
   // Clears all the beenclicked's
   clearAllClicks =() => {
@@ -152,6 +174,9 @@ export default class App extends Component {
     const filteredRobots = this.state.robots.filter(robot => {
       return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
     })
+    const filteredUsers = this.state.users.filter(user => {
+      return user.first_name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+    })
     // console.log("filteredRobots: ", filteredRobots);
     return (
       <Router>
@@ -186,6 +211,7 @@ export default class App extends Component {
             <Route exact path="/home" 
               render={(props) => <HomePage {...props}
               robots={filteredRobots}
+              users={filteredUsers}
               shuffle={() => this.setState({ robots: this.shuffleArray() })}
               getRoboID={this.roboID}
              />}
