@@ -22,42 +22,29 @@ export default class App extends Component {
       highScore: 0,
       wonDisplayed: false,
       // SafeBook Specific Additions
-      first_name: '',
-      middle_name: '',
-      last_name: '',
-      username:'',
-      password:'',
-      user_pic: '',
-      birthdate: '',
-      age: '',
-      id: '',
-      pictures: [],
+      // first_name: '',
+      // middle_name: '',
+      // last_name: '',
+      // username:'',
+      // password:'',
+      // user_pic: '',
+      // birthdate: '',
+      // age: '',
+      // id: '',
+      // pictures: [],
       // Arrau of user objects
       users: [],
       // Single user object
-      newUser: {
-              // Replicate items captured above when entered into a new user
-              first_name: '',
-              middle_name: '',
-              last_name: '',
-              username:'',
-              password:'',
-              user_pic: '',
-              birthdate: '',
-              age: '',
-              id: '',
-              pictures: []
-      },
     }
-    this.onDrop = this.onDrop.bind(this);
+    // this.onDrop = this.onDrop.bind(this);
   }
 
   // For Images in Registration
-  onDrop(picture) {
-    this.setState({
-        pictures: this.state.pictures.concat(picture),
-    });
-  }
+  // onDrop(picture) {
+  //   this.setState({
+  //       pictures: this.state.pictures.concat(picture),
+  //   });
+  // }
 
   // Clears all the beenclicked's
   clearAllClicks =() => {
