@@ -7,19 +7,23 @@ import React from 'react'; // Required for JSX i.e. <div> below is
 export default class RoboButton extends React.Component {
 
   onRoboBtnClick = (id, shuffle, getRoboID) => {
-    // console.log("onRoboBtnClick-id: ", id); // id is KNOWN!
+    console.log("onRoboBtnClick-id: ", id); // id is KNOWN!
+    console.log("onRoboBtnClick-getRoboID: ", getRoboID); // id is KNOWN!
     shuffle();
     return getRoboID(id);
   };
   
   
   render() { // EVERY class that extends Component needs a render()
-    const {id, shuffle, getRoboID } = this.props;
+    const {id, name, username, email, shuffle, getRoboID } = this.props;
+    // console.log("render - getRoboID: ", getRoboID); // id is KNOWN!
+    // console.log("render - id: ", id); // id is KNOWN!
+    // console.log("render - shuffle: ", shuffle); // id is KNOWN!
     return ( 
       // return ONE component i.e. button
       <button  
         onClick={() => this.onRoboBtnClick(id, shuffle, getRoboID)} 
-        className='tc bg-green dit br3 pa2 ma2 grow bw2 shadow-5 fl w-19  card'>
+        className='tc bg-green dit br3 pa2 ma2 grow bw2 shadow-5 fl w-20 card'>
       {/* <img onClick={() => this.onRoboBtnClick(id)} src={`https://robohash.org/${id}?size=150x150`} alt='RoboFoto'/> */}
         <img className='tc' src={`https://robohash.org/${id}?size=100x100`} alt='RoboFoto'/>
         <div className="card-body tc">
@@ -29,9 +33,9 @@ export default class RoboButton extends React.Component {
           {/* <h5 className="card-title">{name}</h5> */}
           {/* <p>Username: {username}</p> Lorem ipsum*/}
           {/* <p>Username:</p> */}
-          {/* <p>{username}</p> */}
-          {/* <p>{name}</p> */}
-          {/* <p className="tl">e-mail: {email}</p> */}
+          <p>{name}</p>
+          <p>{username}</p>
+          <p className="tl">e-mail: {email}</p>
         </div>
       </button>
     )

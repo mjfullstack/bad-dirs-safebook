@@ -3,20 +3,18 @@ import './FixedNavbar.css';
 
 class FixedNavbar extends React.Component {
   render () {
-    const {currentScore, highScore, wonDisplayed} = this.props;
-    console.log(`Score: ${currentScore} High Score: ${highScore}`);
-    console.log(`wonDisplayed: ${wonDisplayed}`);
+    // const {currentScore, highScore, wonDisplayed} = this.props;
+    // console.log(`Score: ${currentScore} High Score: ${highScore}`);
+    // console.log(`wonDisplayed: ${wonDisplayed}`);
   return (
     <nav className="navbar fixed-top tc" role="navigation">
       <div className="container-fluid">
         {/* <!-- Brand and toggle get grouped for better mobile display --> */}
         {/* <div className="navbar-header"> */}
-          <ul className="nav navbar-nav tc">
-            {/* <li><h1>SafeBook  Score: {currentScore} High Score{highScore}</h1></li> */}
-            <li className='tc'><h1 className='tc' >Robo Click ME</h1></li> 
-            <li className='tc'><h2>Score: {currentScore} -- High Score: {highScore}</h2></li>
-            {wonDisplayed ? <li className='tc' id='winner'><h1>You Won!!!</h1></li> : <li></li>}
-          </ul>
+        <a className='nav navbar-nav' href='/home'><h1 className='tc f1'>SafeBook</h1></a>
+          {/* <ul className="nav navbar-nav tc">
+            <li ><a  href='/home'><h1 className='tc f1'>SafeBook</h1></a></li> 
+          </ul> */}
         {/* </div> */}
 
         {/* <!-- Collect the nav links, forms, and other content for toggling --> */}
