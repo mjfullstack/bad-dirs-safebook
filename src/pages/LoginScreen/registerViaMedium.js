@@ -65,6 +65,7 @@ class Register extends Component {
 
 
   handleClick(event, topState) {
+    event.preventDefault(); // EDGAR workaround no persistence
     // Single user object
     const newUser = {
       first_name: this.state.first_name,
@@ -81,7 +82,8 @@ class Register extends Component {
 
     console.log("ENTRY to handleClick - newUser: ", newUser);
     // console.log("ENTRY -  handleClick topState: ", topState);
-    return topState(newUser);
+    topState(newUser); // MUST put in Database HERE
+    return this.props.history.push("/home"); // EDGAR workaround no persistence
   }
 
   render() {
