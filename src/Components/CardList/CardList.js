@@ -3,6 +3,7 @@ import React from 'react';
 import Card from '../Card/Card';
 
 const CardList = ({ users }) => {
+  console.log("CardList -- Users: ", users)
   const cardArray = users.map((user, idx) => {
     return ( 
       <Card 

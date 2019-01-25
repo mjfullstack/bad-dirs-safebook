@@ -8,6 +8,7 @@ import CardList from "../../Components/CardList/CardList";
 
 
 function HomePage ({ robots, users, shuffle, getRoboID}) {
+  console.log("HomePage - users: ", users);
   return (
     <div>
       <MuiThemeProvider>
