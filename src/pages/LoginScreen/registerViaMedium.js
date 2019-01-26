@@ -18,12 +18,13 @@ class Register extends Component {
       first_name: '',
       middle_name: '',
       last_name: '',
+      email: '',
       username:'',
       password:'',
       user_pic: '',
       birthdate: '',
       age: '',
-      id: '',
+      id: 0,
       pictures: [],
       imageURL: ''
       // largeImage
@@ -65,23 +66,27 @@ class Register extends Component {
 
 
   handleClick(event, topState) {
-    event.preventDefault(); // EDGAR workaround no persistence
+    // event.preventDefault(); // EDGAR workaround no persistence
     // Single user object
     const newUser = {
       first_name: this.state.first_name,
       middle_name: this.state.middle_name,
       last_name: this.state.last_name,
+      email: this.state.email,
       username:this.state.username,
       password:this.state.password,
       user_pic: this.state.imageURL,
       birthdate: this.state.birthdate,
       age: this.state.age,
-      id: this.state.id,
+      id: this.state.id + 1,
       pictures: [this.state.imageURL]
     }
 
+    ///////
+    // ADD POST AJAX HERE to send data to backend
+    // versus saving in state here!
+    ///////
     console.log("ENTRY to handleClick - newUser: ", newUser);
-    // console.log("ENTRY -  handleClick topState: ", topState);
     topState(newUser); // MUST put in Database HERE
     return this.props.history.push("/home"); // EDGAR workaround no persistence
   }
@@ -99,23 +104,49 @@ class Register extends Component {
 
           <Container fluid='fluid'>
             <h2 className='myPageTitle'> Registration</h2>
-            <Row className='dataEntry'>
+            <h4 className='myPageSubTitle'>Enter e-mail, username and password:</h4>
+            <Row >
+              <Col size='md-4' margin='0rem' >
+                <TextField className='dataEntry'
+                  hintText="Enter your e-mail"
+                  floatingLabelText="e-mail"
+                  onChange = {(event,newValue) => this.setState({email:newValue})}
+                />
+              </Col>
+              <Col size='md-4' margin='0rem' >
+                <TextField className='dataEntry'
+                  hintText="Select a Username"
+                  floatingLabelText="Username"
+                  onChange = {(event,newValue) => this.setState({username:newValue})}
+                />
+              </Col>
               <Col size='md-4' margin='0rem'>
-                <TextField
+                <TextField className='dataEntry'
+                  type="password"
+                  hintText="Select a Password"
+                  floatingLabelText="Password"
+                  onChange = {(event,newValue) => this.setState({password:newValue})}
+                />
+              </Col>
+            </Row>
+            <h4 className='myPageSubTitle'>Enter Name:</h4>
+            <Row >
+              <Col size='md-4' margin='0rem'>
+                <TextField className='dataEntry'
                   hintText="Enter your FIRST name"
                   floatingLabelText="First Name"
                   onChange = {(event,newValue) => this.setState({first_name:newValue})}
                 />
               </Col>
               <Col size='md-4'>
-                <TextField
+                <TextField className='dataEntry'
                   hintText="Enter your MIDDLE name"
                   floatingLabelText="Middle Name"
                   onChange = {(event,newValue) => this.setState({middle_name:newValue})}
                 />
               </Col>
               <Col size='md-4'>
-                <TextField
+                <TextField className='dataEntry'
                   // type="password"
                   hintText="Enter your LAST name"
                   floatingLabelText="Last Name"

@@ -6,7 +6,7 @@ import React from 'react'; // Required for JSX i.e. <div> below is
   // const { id, name, username, email } = props;
 const Card = (props) => {  
   const { 
-          // id, 
+          id, 
           first_name,
           middle_name,
           last_name,
@@ -23,6 +23,7 @@ const Card = (props) => {
        <div className="card-body">
           <p className="card-title">{first_name} {middle_name} {last_name}</p>
           <p>Username: {username}</p>
+          <p>ID: {id}</p>
           <p>Birth Date:{birthdate}</p>
           <p>Age: {age}</p>
           {/* <p className="tl">e-mail: {email}</p> */}

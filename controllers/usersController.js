@@ -24,9 +24,12 @@ module.exports = {
                 req.params.first_name,
                 req.params.middle_name,
                 req.params.last_name,
-                req.params.user_pic,
+                req.params.email,
+                req.params.username,
+                req.params.password,
                 req.params.birthdate,
                 req.params.age,
+                req.params.user_pic,
                 req.params.created_date,
                 req.params.last_modified_date
             )

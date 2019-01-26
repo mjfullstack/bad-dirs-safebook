@@ -34,14 +34,14 @@ class Login extends Component {
               <Row className='dataEntry'>
                 <Col size='md-2' margin='0rem' />
                 <Col size='md-4' margin='0rem'>
-                  <TextField
+                  <TextField className='dataEntry'
                     hintText="Enter your Username"
                     floatingLabelText="Username"
                     onChange = {(event,newValue) => this.setState({username:newValue})}
                   />
                 </Col>
                 <Col size='md-4' margin='0rem'>
-                  <TextField
+                  <TextField className='dataEntry'
                     type="password"
                     hintText="Enter your Password"
                     floatingLabelText="Password"
