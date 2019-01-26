@@ -99,23 +99,49 @@ class Register extends Component {
 
           <Container fluid='fluid'>
             <h2 className='myPageTitle'> Registration</h2>
-            <Row className='dataEntry'>
+            <h4 className='myPageSubTitle'>Enter e-mail, username and password:</h4>
+            <Row >
+              <Col size='md-4' margin='0rem' >
+                <TextField className='dataEntry'
+                  hintText="Enter your e-mail"
+                  floatingLabelText="e-mail"
+                  onChange = {(event,newValue) => this.setState({email:newValue})}
+                />
+              </Col>
+              <Col size='md-4' margin='0rem' >
+                <TextField className='dataEntry'
+                  hintText="Select a Username"
+                  floatingLabelText="Username"
+                  onChange = {(event,newValue) => this.setState({username:newValue})}
+                />
+              </Col>
               <Col size='md-4' margin='0rem'>
-                <TextField
+                <TextField className='dataEntry'
+                  type="password"
+                  hintText="Select a Password"
+                  floatingLabelText="Password"
+                  onChange = {(event,newValue) => this.setState({password:newValue})}
+                />
+              </Col>
+            </Row>
+            <h4 className='myPageSubTitle'>Enter Name:</h4>
+            <Row >
+              <Col size='md-4' margin='0rem'>
+                <TextField className='dataEntry'
                   hintText="Enter your FIRST name"
                   floatingLabelText="First Name"
                   onChange = {(event,newValue) => this.setState({first_name:newValue})}
                 />
               </Col>
               <Col size='md-4'>
-                <TextField
+                <TextField className='dataEntry'
                   hintText="Enter your MIDDLE name"
                   floatingLabelText="Middle Name"
                   onChange = {(event,newValue) => this.setState({middle_name:newValue})}
                 />
               </Col>
               <Col size='md-4'>
-                <TextField
+                <TextField className='dataEntry'
                   // type="password"
                   hintText="Enter your LAST name"
                   floatingLabelText="Last Name"
@@ -172,4 +198,5 @@ class Register extends Component {
 const style = {
  margin: 15,
 };
+
 export default Register;
