@@ -5,6 +5,7 @@ import SearchBox from "../../Components/SearchBox";
 import RoboList from "../../Components/CardList/RoboList";
 // import RaisedButton from 'material-ui/RaisedButton';
 import './style.css';
+import CardList from "../../Components/CardList/CardList";
 
 
 // const onSearchChange = (event) => {
@@ -14,8 +15,9 @@ import './style.css';
 
 class FindUser extends React.Component {
   render() {
-    const {robots , shuffle, searchChange, getRoboID} = this.props;
+    const {robots , users, shuffle, searchChange, getRoboID} = this.props;
     // console.log("FindUserPage - props: ", robots, shuffle, getRoboID);
+    console.log("FindUserPage - users: ", users);
     return (
       <div>
         <MuiThemeProvider>
@@ -23,7 +25,10 @@ class FindUser extends React.Component {
             <h2 className='myPageTitle'>Find User - Type Letters to Search Names...</h2>
             <SearchBox
               searchChange={searchChange}
-              />
+            />
+            <CardList
+              users={users}
+            />
             <RoboList
               robots={robots}
               // shuffle={() => this.setState({ robots: this.shuffleArray() })}

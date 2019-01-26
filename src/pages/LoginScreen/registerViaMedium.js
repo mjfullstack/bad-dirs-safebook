@@ -25,18 +25,19 @@ class Register extends Component {
       age: '',
       id: '',
       pictures: [],
-      image: ''
+      imageURL: ''
       // largeImage
     };
-    this.onDrop = this.onDrop.bind(this);
+    // this.onDrop = this.onDrop.bind(this);
   }
 
-  // For Images in Registration
-  onDrop(picture) {
-    this.setState({
-        pictures: this.state.pictures.concat(picture),
-    });
-  }
+  // For Images in Registration using 
+  // import ImageUploader from 'react-images-upload' above
+  // onDrop(picture) {
+  //   this.setState({
+  //       pictures: this.state.pictures.concat(picture),
+  //   });
+  // }
   
 
   uploadFile = async e => {
@@ -57,13 +58,14 @@ class Register extends Component {
     const file = await res.json();
     console.log(file);
     this.setState({
-      image: file.secure_url,
+      imageURL: file.secure_url,
       // largeImage: file.eager[0].secure_url
     });
   }
 
 
-  handleClick(event, myState) {
+  handleClick(event, topState) {
+    event.preventDefault(); // EDGAR workaround no persistence
     // Single user object
     const newUser = {
       first_name: this.state.first_name,
@@ -71,18 +73,21 @@ class Register extends Component {
       last_name: this.state.last_name,
       username:this.state.username,
       password:this.state.password,
-      user_pic: this.state.user_pic,
+      user_pic: this.state.imageURL,
       birthdate: this.state.birthdate,
       age: this.state.age,
       id: this.state.id,
-      pictures: [this.state.image]
+      pictures: [this.state.imageURL]
     }
 
     console.log("ENTRY to handleClick - newUser: ", newUser);
-   
+    // console.log("ENTRY -  handleClick topState: ", topState);
+    topState(newUser); // MUST put in Database HERE
+    return this.props.history.push("/home"); // EDGAR workaround no persistence
   }
+
   render() {
-    const {state} = this.props;
+    const {topLevelState} = this.props;
     return (
       <div>
         <MuiThemeProvider>
@@ -118,10 +123,10 @@ class Register extends Component {
                 />
               </Col>
             </Row>
-            <Row>
+            <Row >
               <Col size='md-4' margin='2rem' />
               <Col size='md-4' margin='2rem'>
-              <input 
+              <input className='pa4'
                 type="file" 
                 id="file" 
                 name="file"
@@ -141,15 +146,22 @@ class Register extends Component {
               <Col size='md-4' margin='2rem' />
             </Row>
             <Row>
-              {this.state.image && <img src={this.state.image} alt="Upload Preview" width="200" height='200'/>}
+            </Row>
+            <Row >
+              <Col size='md-4' margin='2rem' />
+              <Col size='md-4' margin='2rem' >
+                {this.state.imageURL && <img className='pa4' src={this.state.imageURL} alt="Upload Preview" width="200" height='200'/>}
+              </Col>
+              <Col size='md-4' margin='2rem' />
             </Row>
           </Container>
           <RaisedButton 
             label="Submit"
+            // href="/home"
             href="#"
             primary={true}
             style={style}
-            onClick={(event) => this.handleClick(event, {state})}
+            onClick={(event) => this.handleClick(event, topLevelState)}
           />
         </div>
          </MuiThemeProvider>

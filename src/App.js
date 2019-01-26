@@ -32,7 +32,7 @@ export default class App extends Component {
       // age: '',
       // id: '',
       // pictures: [],
-      // Arrau of user objects
+      // Array of user objects
       users: [],
       // Single user object
     }
@@ -45,6 +45,14 @@ export default class App extends Component {
   //       pictures: this.state.pictures.concat(picture),
   //   });
   // }
+
+  setTopState = (newUser) => {
+    this.setState((pvSt) => {
+      const updatedUsers = pvSt.users.concat(newUser);
+      // console.log("AFTER PUSH in APP.setTopState - this.state.users[0]: ", this.state.users[0]);
+      return ({users: updatedUsers})
+    })
+  }
 
   // Clears all the beenclicked's
   clearAllClicks =() => {
@@ -171,9 +179,14 @@ export default class App extends Component {
   };
 
   render() {
+    console.log("AFTER PUSH in APP.render - this.state: ", this.state);
+    console.log("AFTER PUSH in APP.render - this.state.users[0]: ", this.state.users[0]);
     const filteredRobots = this.state.robots.filter(robot => {
       return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
     })
+
+    // MUST populate state.users[] from database
+    // to avoid no-persistence work-around
     const filteredUsers = this.state.users.filter(user => {
       return user.first_name.toLowerCase().includes(this.state.searchfield.toLowerCase());
     })
@@ -206,10 +219,16 @@ export default class App extends Component {
           {/* <CardList robots={this.state.robots}/> */}
           {/* <CardList robots={filteredRobots} > */}
           <Switch>
-            <Route exact path="/register" component={Register} />
+            {/* <Route exact path="/register" component={Register} /> */}
+            <Route exact path="/register"
+              render={(props) => <Register {...props} 
+              topLevelState={(newUser) => this.setTopState(newUser)}
+              />}
+            />
             <Route exact path="/" component={Login} />
             <Route exact path="/home" 
               render={(props) => <HomePage {...props}
+              // EDGAR suggested (not req'd) ---> componentDidMount={(props) => <HomePage {...props}
               robots={filteredRobots}
               users={filteredUsers}
               shuffle={() => this.setState({ robots: this.shuffleArray() })}
@@ -221,6 +240,7 @@ export default class App extends Component {
             <Route exact path="/finduser" 
               render={(props) => <FindUser {...props}
               robots={filteredRobots}
+              users={filteredUsers}
               searchChange={(event) => this.setState({searchfield: event.target.value})}
               shuffle={() => this.setState({ robots: this.shuffleArray() })}
               // shuffle={(event) => this.onSearchChange() }
