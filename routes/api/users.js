@@ -3,7 +3,7 @@ const usersController = require("../../controllers/usersController");
 
 var bcrypt = require( 'bcrypt-nodejs' );
 var config = require('../config.js');
-var User = require('../models/User');
+var User = require('../../models/user');
 var jwt = require('jsonwebtoken');
 
 ////////////////////////////
@@ -100,7 +100,7 @@ router.post('/answers',function(req, res) {
   }); // end login
 
 router.post('/register', function(req, res) {
-
+    console.log("SAW REGISTER!!");
     if (!req.body.email || !req.body.password)
       {
         // email address is absolutely necessary for user creation
